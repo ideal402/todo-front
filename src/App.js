@@ -44,7 +44,9 @@ function App() {
 
   const toggleImportant = async (taskId) => {
     try {
-      const response = await api.put(`/tasks/flag/${taskId}`);
+      const response = await api.put(`/tasks/${taskId}`,{
+        flag: true,
+      });
       if (response.status === 200) {
         getTasks();
       }
@@ -55,7 +57,9 @@ function App() {
 
   const toggleComplete = async (taskId) => {
     try {
-      const response = await api.put(`/tasks/${taskId}`);
+      const response = await api.put(`/tasks/${taskId}`,{
+        complete: true,
+      });
       if (response.status === 200) {
         getTasks();
       }
