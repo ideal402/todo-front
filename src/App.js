@@ -53,6 +53,17 @@ function App() {
     }
   };
 
+  const toggleComplete = async (taskId) => {
+    try {
+      const response = await api.put(`/tasks/${taskId}`);
+      if (response.status === 200) {
+        getTasks();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     getTasks();
   }, []);
@@ -60,7 +71,8 @@ function App() {
   return (
     <Container>
       <Row className="add-item-row">
-        <Col xs={12} sm={10}>
+        <Col>
+        <div className="input-wrapper">
           <input
             type="text"
             placeholder="할일을 입력하세요"
@@ -68,17 +80,17 @@ function App() {
             value={todoValue}
             onChange={(event) => setTodoValue(event.target.value)}
           />
-        </Col>
-        <Col xs={12} sm={2}>
           <button className="button-add" onClick={addTask}>
             추가
           </button>
+        </div>
         </Col>
       </Row>
 
       <TodoBoard
         todoList={todoList}
         onDelete={handleDeleteTask}
+        toggleComplete={toggleComplete}
         toggleImportant={toggleImportant}
       />
     </Container>

@@ -1,61 +1,98 @@
-body{
-  color: lightblue !important ;
-  background-color: aliceblue !important; 
+body {
+  color: #333 !important; 
+  background-color: #f0f0f0 !important; 
 }
 
-
-
-.todo-item{
-  border: 1px solid lightblue;
-  background-color: white;
+.todo-item {
+  border: 1px solid #999; 
+  background-color: #fff; 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.todo-content{
-  padding:1em
+
+.todo-content {
+  padding: 1em 1em 1em 0.3em;
 }
-.add-item-row{
-  margin-top:50px !important;
+
+.add-item-row {
+  margin-top: 50px !important;
   margin-bottom: 30px;
 }
-.input-box{
-  padding: 10px;
-  width:100%;
-  border: 1px solid lightblue;
-  
-  
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
 }
-.input-box:focus{
+
+.input-box {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #999;
+  box-sizing: border-box; 
+}
+
+.input-box:focus {
   outline: none;
 }
-.button-add{
-  height: 40px;
-  width: 100%;
+
+.button-add {
+  height: 100%;
+  width: 50px;
   border: none;
-  background-color: lightblue;
+  background-color: #666; 
   color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
-.button-add:hover{
-  background-color: white;
-  color: lightblue;
-  border: 2px solid lightblue;
+
+.button-add:hover {
+  background-color: #f0f0f0; 
+  color: #333; 
+  border: 1px solid #999; 
 }
-.button-delete{
-  background-color: white;
-  border: 2px solid lightblue;
-  color: lightblue;
+
+.button-delete {
+  background-color: #f0f0f0; 
+  border: 2px solid #999; 
+  color: #333; 
   margin: 10px;
 }
-.button-delete:hover{
-  background-color: lightblue;
+
+.button-delete:hover {
+  background-color: #666; 
   color: #ffffff;
 }
 
-.item-complete{
-  background-color: gainsboro;
-  color:white;
+.button-complete{
+  background-color: #f0f0f0; 
+  border: 2px solid #999;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px; 
+  color: #333; 
+  margin: 8px 8px 8px 16px;
 }
-.item-important{
-  border: 1px solid red;
+
+.button-completed{
+  background-color: #555;
+  border: 2px solid black;
+}
+
+.item-complete {
+  background-color: #d3d3d3; 
+  color: black;
+  text-decoration: line-through;
+}
+
+.todo-item-left{
+  display: flex;
+  align-items: center;
+  
+}
+.flag{
+  margin-left: 10px;
+  width: 27px;
+  height: 27px;
 }

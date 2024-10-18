@@ -1,25 +1,11 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import api from "../utils/api";
+import flagIcon from "../assets/flag.png"
 
-const TodoItem = ({ item, onDelete, toggleImportant }) => {
-  const [isComplete, setIsComplete] = useState();
+const TodoItem = ({ item, onDelete, toggleComplete, toggleImportant }) => {
   const taskId = item._id;
-
-  const updateTask = async () => {
-    try {
-      const response = await api.put(`/tasks/${taskId}`);
-      if (response.status === 200) {
-        console.log("update success");
-        setIsComplete(!isComplete);
-      } else {
-        throw new Error("update fail");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  
   const deleteTask = async () => {
     try {
       const response = await api.delete(`/tasks/${taskId}`);
@@ -37,13 +23,13 @@ const TodoItem = ({ item, onDelete, toggleImportant }) => {
   return (
     <Row>
       <Col xs={12}>
-        <div
-          className={`todo-item 
-            ${isComplete ? "item-complete" : ""} 
-            ${item.isFlag ? "item-important" : ""}`
-          }
-        >
-          <div className="todo-content">{item.task}</div>
+        <div className={`todo-item ${item.isComplete ? "item-complete" : ""}`}>
+          <div className="todo-item-left">
+            <button className={`button-complete ${item.isComplete ? "button-completed" : ""}`} onClick={() => toggleComplete(item._id)}>
+            </button>
+            {item.isFlag ? <img className="flag" src={flagIcon}/>:<></>}
+            <div className="todo-content">{item.task}</div>
+          </div>
 
           <div>
             <button
@@ -54,9 +40,6 @@ const TodoItem = ({ item, onDelete, toggleImportant }) => {
             </button>
             <button className="button-delete" onClick={deleteTask}>
               삭제
-            </button>
-            <button className="button-delete" onClick={updateTask}>
-              {isComplete ? "안끝남" : "끝남"}
             </button>
           </div>
         </div>
