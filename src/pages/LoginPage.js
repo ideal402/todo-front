@@ -3,13 +3,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import api from "../utils/api";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
-const LoginPage = () => {
+const LoginPage = ({user, setUser}) => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [error, setError] = useState("");
-  const [ , setUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -30,6 +29,9 @@ const LoginPage = () => {
       setError(error.error);
     }
   };
+  if(user){
+    return <Navigate to="/"></Navigate>
+  }
   return (
     <div className="display-center">
       {error && <div>{error}</div>}

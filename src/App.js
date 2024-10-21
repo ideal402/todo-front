@@ -16,10 +16,10 @@ function App() {
       const storedToken = sessionStorage.getItem("token");
       if(storedToken){
         const response = await api.get("/user/verify");
-        console.log("🚀 ~ getUser ~ response:", response)
+        setUser(response.data.user);
       }    
     }catch(error){
-
+      setUser(null);
     }
   }
 
@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage user = {user} setUser = {setUser}/>} />
       </Routes>
     </BrowserRouter>
   );
