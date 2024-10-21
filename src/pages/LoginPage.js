@@ -4,13 +4,22 @@ import Form from "react-bootstrap/Form";
 import api from "../utils/api";
 import { Link } from "react-router-dom";
 import { useNavigate, Navigate } from "react-router-dom";
+import AlertModal from "../components/AlertModal";
 
 const LoginPage = ({user, setUser}) => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [error, setError] = useState("");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,6 +36,7 @@ const LoginPage = ({user, setUser}) => {
       }
     } catch (error) {
       setError(error.error);
+      handleOpenModal();
     }
   };
   if(user){
@@ -34,7 +44,6 @@ const LoginPage = ({user, setUser}) => {
   }
   return (
     <div className="display-center">
-      {error && <div>{error}</div>}
       <Form className="login-box" onSubmit={handleSubmit}>
         <h1>로그인</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -58,11 +67,23 @@ const LoginPage = ({user, setUser}) => {
           <Button type="submit" className="button-primary">
             Login
           </Button>
-          <span>
-            계정이 없다면? <Link to="/register">회원가입 하기</Link>
-          </span>
+          <div className="link-box">
+            <div className="link-line">
+              <div style={{marginRight:'5px'}}>계정이 없다면?</div>
+              <Link className="link" to="/register">회원가입 하기</Link>
+            </div>
+            {/* <div className="link-line">
+              <div style={{marginRight:'5px'}}>비밀번호를 잊으셨나요? </div>
+              <Link className="link" to="/find">비밀번호 찾기</Link>
+            </div> */}
+          </div>
         </div>
       </Form>
+      <AlertModal
+        isOpen={isModalOpen}
+        message={error}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

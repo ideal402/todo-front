@@ -4,7 +4,7 @@ body {
 }
 
 .todo-item {
-  border: 1px solid #999; 
+  border: 1px solid #8AA696; 
   background-color: #fff; 
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,7 @@ body {
 .input-box {
   padding: 10px;
   width: 100%;
-  border: 1px solid #999;
+  border: 1px solid #8AA696;
   box-sizing: border-box; 
 }
 
@@ -36,14 +36,14 @@ body {
   outline: none;
 }
 button{
-  background-color: lightblue;
+  background-color: #8AA696;
   color: white;
 }
 .button-add {
   height: 100%;
   width: 50px;
   border: none;
-  background-color: #666; 
+  background-color: #8AA696; 
   color: white;
   position: absolute;
   right: 0;
@@ -58,7 +58,7 @@ button{
 
 .button-delete {
   background-color: #f0f0f0; 
-  border: 2px solid #999; 
+  border: 2px solid #8AA696; 
   color: #333; 
   margin: 10px;
 }
@@ -70,7 +70,7 @@ button{
 
 .button-complete{
   background-color: #f0f0f0; 
-  border: 2px solid #999;
+  border: 2px solid #8AA696;
   height: 20px;
   width: 20px;
   border-radius: 50px; 
@@ -101,7 +101,7 @@ button{
 }
 
 .login-box{
-  border:1px solid lightblue;
+  border:1px solid #8AA696;
   max-width: 600px;
   width: 100%;
   background-color: white;
@@ -127,7 +127,33 @@ button{
 }
 
 .button-primary{
-  background-color: lightblue;
+  background-color: #8AA696;
   color: #ffffff;
   border:none;
-} 
+}
+.button-primary:hover{
+  background-color: #666;
+  color: #ffffff;
+}
+.alert-red{
+  color: red;
+}
+.link{
+  text-decoration: none;
+  color: #8AA696;
+  font-weight: bold;
+}
+.link-line{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: end;
+  height: 100%;
+}
+
+
+@media (max-width: 380px) {
+  .link-line {
+    display: block;
+  }
+}
