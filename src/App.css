@@ -61,7 +61,7 @@ button{
   background-color: #f0f0f0; 
   border: 2px solid #8AA696; 
   color: #333; 
-  margin: 10px;
+  margin: 7px 10px 7px 1px;
 }
 
 .button-delete:hover {
@@ -93,8 +93,12 @@ button{
 .todo-item-left{
   display: flex;
   align-items: center;
-  
 }
+.todo-item-right{
+  display: flex;
+  align-self: center;
+}
+
 .flag{
   margin-left: 10px;
   width: 27px;

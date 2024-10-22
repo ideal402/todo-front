@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate  } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import TodoPage from "./pages/TodoPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -30,11 +30,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+      <Route
           path="/"
           element={
-            <PrivateRoute user = {user}>
-              <TodoPage />
+            user ? <Navigate to="/main" /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/main"
+          element={
+            <PrivateRoute user={user}>
+              <TodoPage user = {user} setUser = {setUser} />
             </PrivateRoute>
           }
         />

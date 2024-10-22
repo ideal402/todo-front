@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import api from "../utils/api";
@@ -26,11 +26,10 @@ const LoginPage = ({user, setUser}) => {
     try {
       const response = await api.post("/user/login", { email, pw });
       if (response.status === 200) {
-        setUser(response.data.user);
         sessionStorage.setItem("token", response.data.token);
         api.defaults.headers["authorization"] = "Bearer " + response.data.token;
         setError("");
-        navigate("/");
+        setUser(response.data.findUser);
       } else {
         throw new Error(response.message);
       }
@@ -39,15 +38,23 @@ const LoginPage = ({user, setUser}) => {
       handleOpenModal();
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/main");
+    }
+  }, [user, navigate]);
+
   if(user){
-    return <Navigate to="/"></Navigate>
+    return <Navigate to="/main"></Navigate>
   }
+
   return (
     <div className="display-center">
       <Form className="login-box" onSubmit={handleSubmit}>
         <h1>로그인</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label style={{ color: '#54735F'}}>Email address</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -56,7 +63,7 @@ const LoginPage = ({user, setUser}) => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{ color: '#54735F'}}>Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Password"

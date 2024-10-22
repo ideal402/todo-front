@@ -30,8 +30,8 @@ const TodoItem = ({ item, onDelete, toggleComplete, toggleImportant }) => {
             {item.isFlag ? <img className="flag" src={flagIcon}/>:<></>}
             <div className="todo-content">{item.task}</div>
           </div>
-
-          <div>
+          <div className="todo-item-right">
+            <div style={{alignSelf:"center", marginRight:"7px"}}>by {item.author.name}</div>
             <button
               className="button-delete"
               onClick={() => toggleImportant(item._id)}
