@@ -80,7 +80,7 @@ const TodoPage = ({user, setUser}) => {
     <Container>
       <Row>
         <Col>
-        <button className="logout" onClick={handleLogout}>로그아웃</button>
+          <button className="button-logout" onClick={handleLogout}>로그아웃</button>
         </Col>
       </Row>
       <Row className="add-item-row">
