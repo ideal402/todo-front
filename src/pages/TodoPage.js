@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TodoBoard from "../components/TodoBoard";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import api from "../utils/api";
 
-const TodoPage = () => {
+const TodoPage = ({user, setUser}) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
+  const navigate = useNavigate();
 
   const getTasks = async () => {
     const response = await api.get("/tasks");
@@ -64,12 +66,23 @@ const TodoPage = () => {
     }
   }
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
+  }
+
   useEffect(() => {
     getTasks();
   }, []);
 
   return (
     <Container>
+      <Row>
+        <Col>
+          <button className="button-logout" onClick={handleLogout}>로그아웃</button>
+        </Col>
+      </Row>
       <Row className="add-item-row">
         <Col>
         <div className="input-wrapper">

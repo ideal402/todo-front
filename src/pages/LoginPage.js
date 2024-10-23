@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import api from "../utils/api";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import AlertModal from "../components/AlertModal";
 
-const LoginPage = () => {
+const LoginPage = ({user, setUser}) => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [error, setError] = useState("");
-  const [ , setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,11 +26,10 @@ const LoginPage = () => {
     try {
       const response = await api.post("/user/login", { email, pw });
       if (response.status === 200) {
-        setUser(response.data.user);
         sessionStorage.setItem("token", response.data.token);
         api.defaults.headers["authorization"] = "Bearer " + response.data.token;
         setError("");
-        navigate("/");
+        setUser(response.data.findUser);
       } else {
         throw new Error(response.message);
       }
@@ -41,13 +39,22 @@ const LoginPage = () => {
     }
   };
 
-  
+  useEffect(() => {
+    if (user) {
+      navigate("/main");
+    }
+  }, [user, navigate]);
+
+  if(user){
+    return <Navigate to="/main"></Navigate>
+  }
+
   return (
     <div className="display-center">
       <Form className="login-box" onSubmit={handleSubmit}>
         <h1>로그인</h1>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label style={{ color: '#54735F'}}>Email address</Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter email"
@@ -56,7 +63,7 @@ const LoginPage = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{ color: '#54735F'}}>Password</Form.Label>
           <Form.Control
             type="password"
             placeholder="Password"
