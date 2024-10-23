@@ -27,7 +27,7 @@ const TodoPage = ({user, setUser}) => {
       if (response.status === 200) {
         console.log("success");
         setTodoValue("");
-        // getTasks();
+        getTasks();
       } else {
         throw new Error("task can not be added");
       }
